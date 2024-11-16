@@ -17,4 +17,12 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :platform do
+    namespace :api do
+      namespace :v1 do
+        resources :share_orders, only: %i[index]
+      end
+    end
+  end
 end

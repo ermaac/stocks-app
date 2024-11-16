@@ -8,9 +8,9 @@ class Marketplace::ShareOrder < ApplicationRecord
   ORDER_STATES = %i[created completed]
 
   enumerize :order_type, in: ORDER_TYPES, default: ORDER_TYPES.first
-  enumerize :state, in: ORDER_STATES, default: ORDER_STATES.first
+  enumerize :state, in: ORDER_STATES, default: ORDER_STATES.first, scope: :shallow
 
-  scope :completed, -> { where(state: :completed) }
   scope :recent, -> { order(created_at: :desc) }
-  scope :buy_orders, -> { where(order_type: :buy) }
+  scope :buy_orders, -> { where(order_type: "buy") }
+  scope :opened, -> { where.not(id: completed) }
 end
