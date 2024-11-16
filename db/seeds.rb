@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+3.times do
+  total_shares_amount = (rand(5) + 1) * 100_000_000
+  Organization.create(
+    name: Faker::Company.unique.name,
+    total_shares_amount: total_shares_amount,
+    available_shares_amount: rand * total_shares_amount
+  )
+end
+2.times do
+  total_shares_amount = (rand(5) + 1) * 100_000_000
+  Organization.create(
+    name: Faker::Company.unique.name,
+    total_shares_amount: total_shares_amount,
+    available_shares_amount: 0
+  )
+end
