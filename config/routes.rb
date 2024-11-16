@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   namespace :marketplace do
     namespace :api do
       namespace :v1 do
-        resources :organizations, only: %i[index]
+        resources :organizations, only: %i[index] do
+          get :share_orders, on: :member
+        end
         resources :share_orders, only: %i[create]
       end
     end
