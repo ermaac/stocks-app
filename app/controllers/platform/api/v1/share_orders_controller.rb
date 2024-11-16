@@ -1,5 +1,20 @@
 class Platform::Api::V1::ShareOrdersController < Platform::Api::BaseController
+  before_action :load_share_order, only: %i[accept]
+
   def index
     render json: current_tenant.share_orders.recent.opened.as_json(methods: :user)
+  end
+
+  def accept
+    result = Platform::Actions::ShareOrders::Accept.result(share_order: @share_order, user: current_user)
+    return render json: {}, status: :unprocessable_entity unless result.success?
+
+    render json: @share_order.reload
+  end
+
+  private
+
+  def load_share_order
+    @share_order = current_tenant.share_orders.find_by(id: params[:id])
   end
 end

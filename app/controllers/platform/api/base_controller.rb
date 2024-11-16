@@ -3,4 +3,9 @@ class Platform::Api::BaseController < ApplicationController
   def current_tenant
     @current_tenant ||= Organization.first
   end
+
+  # TODO: handle via authenticated user
+  def current_user
+    current_tenant.users.first
+  end
 end
