@@ -1,4 +1,4 @@
-class Marketplace::Api::V1::ShareOrdersController < ApplicationController
+class Marketplace::Api::V1::ShareOrdersController < Marketplace::Api::BaseController
   def create
     @result = Marketplace::Actions::CreateShareOrder.result(
       **share_order_params,

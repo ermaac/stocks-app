@@ -1,4 +1,4 @@
-class Marketplace::Api::V1::OrganizationsController < ApplicationController
+class Marketplace::Api::V1::OrganizationsController < Marketplace::Api::BaseController
   before_action :load_organization, only: %i[share_orders]
 
   def index
