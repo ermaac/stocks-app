@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         resources :share_orders, only: %i[index] do
           member do
             post :accept
+            post :reject
           end
         end
       end
