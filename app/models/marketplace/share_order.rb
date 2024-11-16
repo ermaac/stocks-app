@@ -3,7 +3,7 @@ class Marketplace::ShareOrder < ApplicationRecord
 
   belongs_to :user, class_name: Marketplace::User.name
   belongs_to :organization
-  belongs_to :modified_by, class_name: Platform::User.name
+  belongs_to :modified_by, class_name: Platform::User.name, optional: true
 
   ORDER_TYPES = %i[buy]
   ORDER_STATES = %i[created accepted rejected completed]

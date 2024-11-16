@@ -2,11 +2,13 @@ class Marketplace::Api::V1::OrganizationsController < ApplicationController
   before_action :load_organization, only: %i[share_orders]
 
   def index
-    render json: Organization.all
+    @organizations = Organization.all
+    render json: OrganizationSerializer.new(@organizations)
   end
 
   def share_orders
-    render json: Marketplace::ShareOrder.recent.completed.buy_orders.where(organization: @organization)
+    @share_orders = Marketplace::ShareOrder.recent.completed.buy_orders.where(organization: @organization)
+    render json: Marketplace::ShareOrderSerializer.new(@share_orders)
   end
 
   private

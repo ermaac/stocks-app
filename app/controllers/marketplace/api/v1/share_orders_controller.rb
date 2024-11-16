@@ -1,13 +1,13 @@
 class Marketplace::Api::V1::ShareOrdersController < ApplicationController
   def create
-    result = Marketplace::Actions::CreateShareOrder.result(
+    @result = Marketplace::Actions::CreateShareOrder.result(
       **share_order_params,
       organization: organization,
       user: user
     )
-    return render json: {}, status: :unprocessable_entity if result.failure?
+    return render json: {}, status: :unprocessable_entity if @result.failure?
 
-    render json: result.share_order
+    render json: Marketplace::ShareOrderSerializer.new(@result.share_order)
   end
 
   private
@@ -16,6 +16,7 @@ class Marketplace::Api::V1::ShareOrdersController < ApplicationController
     Organization.find_by(id: params[:organization_id])
   end
 
+  # TODO: replace with authenticated user
   def user
     Marketplace::User.find_by(id: params[:user_id])
   end
