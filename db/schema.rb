@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_16_191335) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_16_193652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_191335) do
     t.string "order_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "modified_by_id"
+    t.index ["modified_by_id"], name: "index_marketplace_share_orders_on_modified_by_id"
     t.index ["organization_id"], name: "index_marketplace_share_orders_on_organization_id"
     t.index ["user_id"], name: "index_marketplace_share_orders_on_user_id"
   end
@@ -56,5 +58,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_191335) do
 
   add_foreign_key "marketplace_share_orders", "marketplace_users", column: "user_id"
   add_foreign_key "marketplace_share_orders", "organizations"
+  add_foreign_key "marketplace_share_orders", "platform_users", column: "modified_by_id"
   add_foreign_key "platform_users", "organizations"
 end
