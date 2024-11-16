@@ -94,6 +94,8 @@ GEM
     dotenv (3.1.4)
     drb (2.2.1)
     ed25519 (1.3.0)
+    enumerize (2.5.0)
+      activesupport (>= 3.2)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
@@ -315,6 +317,7 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  enumerize (~> 2.5.0)
   faker (~> 3.5.1)
   kamal
   pg (~> 1.5)
