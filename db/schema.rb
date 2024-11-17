@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_16_222719) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_17_105424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,6 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_222719) do
     t.integer "available_shares_amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "blocked_shares_amount", default: 0, null: false
   end
 
   create_table "platform_users", force: :cascade do |t|
