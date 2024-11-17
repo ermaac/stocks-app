@@ -9,18 +9,11 @@ module Marketplace
       output :share_order
 
       def call
-        ActiveRecord::Base.transaction do
-          block_shares_amount
-          self.share_order = create_share_order
-        end
+        self.share_order = create_share_order
+        Marketplace::RegisterShareOrderJob.perform_async(organization.id, self.share_order.id) if self.share_order
       end
 
       private
-
-      def block_shares_amount
-        organization.increment!(:blocked_shares_amount, shares_amount)
-        organization.decrement!(:available_shares_amount, shares_amount)
-      end
 
       def create_share_order
         Marketplace::ShareOrder.create!(
