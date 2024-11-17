@@ -8,9 +8,8 @@ class Platform::Api::BaseController < ApplicationController
     @current_tenant ||= Organization.first
   end
 
-  # TODO: handle via authenticated user
   def current_user
-    current_tenant.users.first
+    @authenticated_user
   end
 
   protected
@@ -18,10 +17,10 @@ class Platform::Api::BaseController < ApplicationController
   def authenticate_user!
     authenticate_or_request_with_http_basic("Marketplace API") do |email, password|
       user = Platform::User.find_by(email: email)
-      authenticated_user =  user&.authenticate(password)
-      return render json: {}, status: :unauthorized unless authenticated_user
+      @authenticated_user = user if user&.authenticate(password)
+      return render json: {}, status: :unauthorized unless @authenticated_user
 
-      authenticated_user
+      @authenticated_user
     end
   end
 end
