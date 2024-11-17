@@ -3,7 +3,7 @@ class Marketplace::Api::V1::ShareOrdersController < Marketplace::Api::BaseContro
     @result = Marketplace::Actions::CreateShareOrder.result(
       **share_order_params,
       organization: organization,
-      user: user
+      user: current_user
     )
     return render json: {}, status: :unprocessable_entity if @result.failure?
 
@@ -14,11 +14,6 @@ class Marketplace::Api::V1::ShareOrdersController < Marketplace::Api::BaseContro
 
   def organization
     Organization.find_by(id: params[:organization_id])
-  end
-
-  # TODO: replace with authenticated user
-  def user
-    Marketplace::User.find_by(id: params[:user_id])
   end
 
   def share_order_params
