@@ -1,5 +1,6 @@
 class Platform::Api::BaseController < ApplicationController
   include ActionController::HttpAuthentication::Basic::ControllerMethods
+  include ApiRescueable
 
   before_action :authenticate_user!
 

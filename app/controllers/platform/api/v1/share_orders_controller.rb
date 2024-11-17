@@ -23,6 +23,6 @@ class Platform::Api::V1::ShareOrdersController < Platform::Api::BaseController
   private
 
   def load_share_order
-    @share_order = current_tenant.share_orders.find_by(id: params[:id])
+    @share_order = current_tenant.share_orders.find(params[:id])
   end
 end

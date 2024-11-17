@@ -13,7 +13,7 @@ class Marketplace::Api::V1::ShareOrdersController < Marketplace::Api::BaseContro
   private
 
   def organization
-    Organization.find_by(id: params[:organization_id])
+    Organization.find(params[:organization_id])
   end
 
   def share_order_params

@@ -14,6 +14,6 @@ class Marketplace::Api::V1::OrganizationsController < Marketplace::Api::BaseCont
   private
 
   def load_organization
-    @organization = Organization.find_by(id: params[:id])
+    @organization = Organization.find(params[:id])
   end
 end
