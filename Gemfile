@@ -34,6 +34,7 @@ gem 'service_actor', '~> 3.9.4'
 gem 'enumerize', '~> 2.5.0'
 gem 'alba', '~> 3.3'
 gem 'bcrypt', '~> 3.1.7'
+gem 'sidekiq', '~> 7.3.5'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
