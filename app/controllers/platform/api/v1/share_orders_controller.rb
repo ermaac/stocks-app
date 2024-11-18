@@ -7,16 +7,12 @@ class Platform::Api::V1::ShareOrdersController < Platform::Api::BaseController
   end
 
   def accept
-    result = Platform::Actions::ShareOrders::Accept.result(share_order: @share_order, user: current_user)
-    return render json: {}, status: :unprocessable_entity unless result.success?
-
+    Platform::Actions::ShareOrders::Accept.call(share_order: @share_order, user: current_user)
     render json: Platform::ShareOrderSerializer.new(@share_order.reload)
   end
 
   def reject
-    result = Platform::Actions::ShareOrders::Reject.result(share_order: @share_order, user: current_user)
-    return render json: {}, status: :unprocessable_entity unless result.success?
-
+    Platform::Actions::ShareOrders::Reject.call(share_order: @share_order, user: current_user)
     render json: Platform::ShareOrderSerializer.new(@share_order.reload)
   end
 
