@@ -1,8 +1,10 @@
 module Marketplace
-  module Actions
+  module Commands
     class BlockOrganizationSharesAmount < Actor
-      input :shares_amount, type: Integer
-      input :organization, type: Organization
+      include ServiceActorArguments
+
+      input :shares_amount, type: MUST_BE_A_NUMBER, allow_nil: FORBID_NIL_VALUES, must: { be_positive: MUST_BE_A_POSITIVE_NUMBER }
+      input :organization, type: Organization, allow_nil: FORBID_NIL_VALUES
 
       def call
         fail!(error: "Insufficient shares amount") unless blocking_shares_possible?
