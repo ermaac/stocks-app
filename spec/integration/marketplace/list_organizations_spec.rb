@@ -1,8 +1,8 @@
 require 'rails_helper'
-require_relative './shared_examples'
+require_relative '../shared_examples'
 
 RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request do
-  let!(:user) { create(:marketplace_user, username: 'testuser', password: 'password123') }
+  let!(:user) { create(:marketplace_user) }
   let(:valid_auth_headers) { { Authorization: "Basic #{Base64.strict_encode64("#{user.username}:#{user.password}")}" } }
   let(:invalid_auth_headers) { { Authorization: "Basic #{Base64.strict_encode64("#{user.username}:wrongpassword")}" } }
   let(:auth_headers) { {} }
@@ -12,7 +12,7 @@ RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request d
 
   let(:endpoint_path) { "/marketplace/api/v1/organizations" }
 
-  describe "GET /api/v1/organizations" do
+  describe "GET /marketplace/api/v1/organizations" do
     context "when authorization header is not provided" do
       let(:auth_headers) { {} }
 
