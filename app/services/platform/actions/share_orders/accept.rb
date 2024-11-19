@@ -14,7 +14,7 @@ module Platform
         private
 
         def can_accept?
-          share_order.pending?
+          share_order.registered?
         end
 
         def accept!

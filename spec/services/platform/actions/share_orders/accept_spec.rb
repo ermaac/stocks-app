@@ -8,11 +8,11 @@ RSpec.describe Platform::Actions::ShareOrders::Accept do
   describe '#call' do
     subject { actor }
 
-    context 'when the share order is pending' do
-      let(:initial_state) { :pending }
+    context 'when the share order is registered' do
+      let(:initial_state) { :registered }
 
       it 'updates the share order state to accepted' do
-        expect { subject }.to change { share_order.reload.state }.from('pending').to('accepted')
+        expect { subject }.to change { share_order.reload.state }.from('registered').to('accepted')
         expect(share_order.reload.modified_by).to eq(user)
       end
 
@@ -21,7 +21,7 @@ RSpec.describe Platform::Actions::ShareOrders::Accept do
       end
     end
 
-    context 'when the share order is not pending' do
+    context 'when the share order is not registered' do
       let(:initial_state) { :completed }
 
       it 'does not update the share order state' do
