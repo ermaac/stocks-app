@@ -6,7 +6,7 @@ module Marketplace
       input :shares_amount, type: MUST_BE_A_NUMBER, allow_nil: FORBID_NIL_VALUES, must: { be_positive: MUST_BE_A_POSITIVE_NUMBER }
       input :price_per_share, type: MUST_BE_A_NUMBER_OR_FLOAT, allow_nil: FORBID_NIL_VALUES, must: { be_positive: MUST_BE_A_POSITIVE_NUMBER }
       input :organization_id, allow_nil: FORBID_NIL_VALUES
-      input :user, type: Marketplace::User
+      input :user, type: Marketplace::User, allow_nil: FORBID_NIL_VALUES
 
       output :share_order
 
