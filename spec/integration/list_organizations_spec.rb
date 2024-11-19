@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative './shared_examples'
 
 RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request do
   let!(:user) { create(:marketplace_user, username: 'testuser', password: 'password123') }
@@ -10,22 +11,6 @@ RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request d
   let!(:organization2) { create(:organization) }
 
   let(:endpoint_path) { "/marketplace/api/v1/organizations" }
-
-  shared_examples 'unauthenticated api request' do
-    it do
-      get endpoint_path, headers: auth_headers
-
-      expect(response).to have_http_status(:unauthorized)
-    end
-  end
-
-  shared_examples 'authenticated api request' do
-    it do
-      get endpoint_path, headers: auth_headers
-
-      expect(response).to have_http_status(:ok)
-    end
-  end
 
   describe "GET /api/v1/organizations" do
     context "when authorization header is not provided" do
