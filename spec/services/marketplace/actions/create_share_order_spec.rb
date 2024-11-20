@@ -5,7 +5,7 @@ RSpec.describe Marketplace::Actions::CreateShareOrder do
   let(:organization) { create(:organization) }
 
   let(:shares_amount) { 100 }
-  let(:price_per_share) { 50.0 }
+  let(:price_per_share) { 50 }
 
   let(:valid_inputs) do
     {
@@ -55,7 +55,7 @@ RSpec.describe Marketplace::Actions::CreateShareOrder do
 
         expect {
           described_class.call(invalid_inputs)
-        }.to raise_error(ServiceActor::ArgumentError, /must be positive/)
+        }.to raise_error(ServiceActor::ArgumentError, /The value "shares_amount" must be positive/)
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe Marketplace::Actions::CreateShareOrder do
 
         expect {
           described_class.call(invalid_inputs)
-        }.to raise_error(ServiceActor::ArgumentError, /must be positive/)
+        }.to raise_error(ServiceActor::ArgumentError, /The value "price_per_share" must be positive/)
       end
     end
 

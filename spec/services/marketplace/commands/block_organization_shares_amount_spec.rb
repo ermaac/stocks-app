@@ -5,25 +5,27 @@ RSpec.describe Marketplace::Commands::BlockOrganizationSharesAmount do
 
   describe '.call' do
     context 'when blocking shares is possible' do
-      it 'successfully blocks the specified shares amount' do
-        result = described_class.call(shares_amount: 200, organization: organization)
+      let(:order_shares_amount) { 200 }
+      subject { described_class.call(shares_amount: order_shares_amount, organization: organization) }
 
-        expect(result).to be_success
-        organization.reload
-        expect(organization.available_shares_amount).to eq(300)
-        expect(organization.blocked_shares_amount).to eq(300)
+      it 'successfully blocks the specified shares amount' do
+        expect { subject }.to change {
+          organization.reload.available_shares_amount
+        }.by(-order_shares_amount).and(change {
+          organization.reload.blocked_shares_amount
+        }.by(order_shares_amount))
       end
     end
 
     context 'when the available shares amount is insufficient' do
-      it 'fails with an error' do
-        result = described_class.result(shares_amount: 600, organization: organization)
+      subject(:result) { described_class.result(shares_amount: 600, organization: organization) }
 
+      it 'fails with an error' do
+        expect { subject }.to not_change {
+          organization.reload.available_shares_amount }
+          .and(not_change { organization.reload.blocked_shares_amount })
         expect(result).to be_failure
         expect(result.error).to eq('Insufficient shares amount')
-        organization.reload
-        expect(organization.available_shares_amount).to eq(500)
-        expect(organization.blocked_shares_amount).to eq(100)
       end
     end
 
