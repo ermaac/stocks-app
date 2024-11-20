@@ -8,7 +8,10 @@ module Platform
         def call
           fail!(error: "Can not accept order in #{share_order.state} state") unless can_accept?
 
-          accept!
+          ActiveRecord::Base.transaction do
+            accept!
+            Commands::CreatePurchasedShare.call(share_order: share_order)
+          end
         end
 
         private

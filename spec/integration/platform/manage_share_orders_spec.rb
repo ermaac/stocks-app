@@ -35,7 +35,7 @@ RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request d
 
         it_behaves_like 'authenticated api request'
 
-        %i[pending registered accepted rejected].each do |state|
+        %i[pending registered accepted].each do |state|
           context "when order is in #{state} state" do
             let!(:share_order) { create(:marketplace_share_order, state: state, organization: organization) }
 
@@ -101,11 +101,11 @@ RSpec.describe "Marketplace::Api::V1::OrganizationsController", type: :request d
         end
 
         context 'and state is registered' do
-          it 'transitions order to accepted state' do
+          it 'transitions order to comleted state' do
             post endpoint_path, headers: auth_headers
 
             json_response = JSON.parse(response.body)
-            expect(json_response['state']).to eq('accepted')
+            expect(json_response['state']).to eq('completed')
           end
         end
       end

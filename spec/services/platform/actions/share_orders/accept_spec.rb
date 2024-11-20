@@ -11,8 +11,10 @@ RSpec.describe Platform::Actions::ShareOrders::Accept do
     context 'when the share order is registered' do
       let(:initial_state) { :registered }
 
-      it 'updates the share order state to accepted' do
-        expect { subject }.to change { share_order.reload.state }.from('registered').to('accepted')
+      it 'updates the share order state to completed' do
+        expect { subject }.to change { share_order.reload.state }.from('registered').to('completed').and(
+          change { Marketplace::PurchasedShare.count }.by(1)
+        )
         expect(share_order.reload.modified_by).to eq(user)
       end
 

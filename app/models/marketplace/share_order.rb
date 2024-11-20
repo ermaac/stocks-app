@@ -13,5 +13,5 @@ class Marketplace::ShareOrder < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
   scope :buy_orders, -> { where(order_type: "buy") }
-  scope :opened, -> { where.not(state: [ :completed, :closed ]) }
+  scope :opened, -> { where.not(state: [ :completed, :closed, :rejected ]) }
 end
