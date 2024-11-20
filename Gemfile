@@ -53,6 +53,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "faker", "~> 3.5.1"
   gem "pry-byebug"
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails", "~> 7.1.0"
   gem "factory_bot", "~> 6.5.0"
 end
