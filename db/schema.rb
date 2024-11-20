@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_17_105424) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_093723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "marketplace_purchased_shares", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.decimal "amount", null: false
+    t.bigint "share_order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_marketplace_purchased_shares_on_organization_id"
+    t.index ["share_order_id"], name: "index_marketplace_purchased_shares_on_share_order_id"
+    t.index ["user_id"], name: "index_marketplace_purchased_shares_on_user_id"
+  end
 
   create_table "marketplace_share_orders", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -59,6 +71,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_17_105424) do
     t.index ["organization_id"], name: "index_platform_users_on_organization_id"
   end
 
+  add_foreign_key "marketplace_purchased_shares", "marketplace_share_orders", column: "share_order_id"
+  add_foreign_key "marketplace_purchased_shares", "marketplace_users", column: "user_id"
+  add_foreign_key "marketplace_purchased_shares", "organizations"
   add_foreign_key "marketplace_share_orders", "marketplace_users", column: "user_id"
   add_foreign_key "marketplace_share_orders", "organizations"
   add_foreign_key "marketplace_share_orders", "platform_users", column: "modified_by_id"
