@@ -16,14 +16,15 @@ Platform API: username: `businessowner@test.com`, password: `password123`
 1. List organizations: `GET /marketplace/api/v1/organizations`
 2. List orgniazation orders: `GET /marketplace/api/v1/organizations/:id/share_orders`
 3. Create share order: `POST /marketplace/api/v1/share_orders`
-### Example body
-```json
-{
-  "shares_amount": 1000,
-  "price_per_share": 10,
-  "organization_id": 1
-}
-```
+
+    Example body
+    ```json
+    {
+      "shares_amount": 1000,
+      "price_per_share": 10,
+      "organization_id": 1
+    }
+    ```
 
 ### Platfrom API
 
