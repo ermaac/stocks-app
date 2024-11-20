@@ -31,7 +31,7 @@ gem "thruster", require: false
 gem "pg", "~> 1.5"
 
 gem "service_actor", "~> 3.9.4"
-gem "enumerize", "~> 2.5.0"
+gem "enumerize", "~> 2.8.1"
 gem "alba", "~> 3.3"
 gem "bcrypt", "~> 3.1.7"
 gem "sidekiq", "~> 7.3.5"
