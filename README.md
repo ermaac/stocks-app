@@ -6,7 +6,9 @@
 4. Run sidekiq: `bundle exec sidekiq`
 
 Once everything is setup you can use APIs with following test creds via Basic auth:
+
 Marketplace API: username: `samplebuyer`, password: `password456`
+
 Platform API: username: `businessowner@test.com`, password: `password123`
 
 # API endpoints
