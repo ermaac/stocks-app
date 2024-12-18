@@ -133,7 +133,7 @@ GEM
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
     language_server-protocol (3.17.0.3)
-    logger (1.6.1)
+    logger (1.6.3)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -232,7 +232,7 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    redis-client (0.22.2)
+    redis-client (0.23.0)
       connection_pool
     regexp_parser (2.9.2)
     reline (0.5.11)
@@ -286,7 +286,7 @@ GEM
     securerandom (0.3.2)
     service_actor (3.9.4)
       zeitwerk (>= 1.0)
-    sidekiq (7.3.5)
+    sidekiq (7.3.7)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
@@ -369,7 +369,7 @@ DEPENDENCIES
   rspec-rails (~> 7.0.0)
   rubocop-rails-omakase
   service_actor (~> 3.9.4)
-  sidekiq (~> 7.3.5)
+  sidekiq (~> 7.3.7)
   solid_cache
   solid_queue
   sqlite3 (>= 2.1)
